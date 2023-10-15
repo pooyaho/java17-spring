@@ -3,17 +3,14 @@ package ir.mapsa.java.java17spring.controllers;
 import ir.mapsa.java.java17spring.models.Response;
 import ir.mapsa.java.java17spring.models.Sample;
 import ir.mapsa.java.java17spring.models.Sample2;
-import ir.mapsa.java.java17spring.services.SampleService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FirstController {
 
-    @Autowired
-    private SampleService sampleService;
+
 
     @GetMapping("/hello1/{name}")
     public String sayHello1(@PathVariable String name) {
@@ -45,8 +42,7 @@ public class FirstController {
                             .payload("Unauthorized")
                             .build());
         }
-        Response response = sampleService.doSomething(sample);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new Response());
     }
 
 }
