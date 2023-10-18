@@ -31,7 +31,7 @@ public class StudentEntity {
     @Enumerated(EnumType.STRING)
     @Transient
     private StudyField field;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> borrowedBooks;
     private String name;
     private String family;

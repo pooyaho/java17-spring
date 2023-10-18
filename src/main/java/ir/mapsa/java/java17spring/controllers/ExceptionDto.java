@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExceptionDto {
+//    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date timestamp;
     private String message;
     private Integer errorCode;

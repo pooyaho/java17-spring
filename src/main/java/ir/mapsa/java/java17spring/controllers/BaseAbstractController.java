@@ -4,6 +4,7 @@ import ir.mapsa.java.java17spring.converters.BaseAdapter;
 import ir.mapsa.java.java17spring.services.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public abstract class BaseAbstractController<D,E> {
 
     @PostMapping
     @Transactional
-    public void save(@RequestBody D dto) {
+    public void save(@Validated({NotNullGroup.class, GeneralValidationGroup.class}) @RequestBody D dto) {
         service.save(adapter.convertDto(dto));
     }
 
@@ -39,7 +40,7 @@ public abstract class BaseAbstractController<D,E> {
     }
 
     @PostMapping("/search")
-    public List<D> findByExample(@RequestBody D dto) {
+    public List<D> findByExample(@Validated(GeneralValidationGroup.class) @RequestBody D dto) {
         return adapter.convertEntities(service.findBySample(adapter.convertDto(dto)));
     }
 }

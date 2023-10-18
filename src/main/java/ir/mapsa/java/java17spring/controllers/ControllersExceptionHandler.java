@@ -1,8 +1,11 @@
 package ir.mapsa.java.java17spring.controllers;
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,15 +44,27 @@ public class ControllersExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody ExceptionDto handle(Exception e, HttpServletRequest request) {
+        e.printStackTrace();
         String locale = request.getHeader("locale");
 
         Properties properties = this.propertiesMap.get(locale);
         if (properties == null) {
             properties = this.propertiesMap.get("fa_IR");
         }
-        Object translate = properties.get(e.getClass().getName());
+        String errorKey = e.getClass().getName();
+        if (e instanceof MethodArgumentNotValidException) {
+            for (FieldError fieldError : ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors()) {
+                errorKey = fieldError.getDefaultMessage();
+            }
+            System.out.println(errorKey);
+        }
+        Object translate = properties.get(errorKey);
         if (translate == null) {
             translate = properties.get(Exception.class.getName());
+        }
+        if (e.getCause() != null && e.getCause() instanceof UnrecognizedPropertyException) {
+            String propertyName = ((UnrecognizedPropertyException) e.getCause()).getPropertyName();
+            translate = String.format(String.valueOf(translate), propertyName);
         }
         return ExceptionDto.builder()
                 .errorCode(10)

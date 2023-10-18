@@ -2,6 +2,7 @@ package ir.mapsa.java.java17spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -27,6 +28,6 @@ public abstract class AbstractService<E> {
         return repository.findAll();
     }
     public List<E> findBySample(E entity) {
-        return repository.findAll(Example.of(entity));
+        return repository.findAll(Example.of(entity, ExampleMatcher.matchingAny()));
     }
 }
