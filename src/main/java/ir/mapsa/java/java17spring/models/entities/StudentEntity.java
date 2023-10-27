@@ -1,8 +1,15 @@
 package ir.mapsa.java.java17spring.models.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @NamedQueries(
         {
-                @NamedQuery(name="StudentEntity.query1",query="select e from StudentEntity  e")
+                @NamedQuery(name = "StudentEntity.query1", query = "select e from StudentEntity  e")
         }
 )
 @DiscriminatorValue("1")
@@ -26,7 +33,7 @@ public class StudentEntity {
     @Column(length = 10)
     private String studentId;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "st_co",joinColumns = @JoinColumn(),inverseJoinColumns = @JoinColumn())
+
     private List<CourseEntity> passedCourses;
     @Enumerated(EnumType.STRING)
     @Transient
@@ -44,12 +51,23 @@ public class StudentEntity {
     @Version
     private Integer version;
 
-//    public static void main(String[] args) {
-//        System.out.println(UUID.randomUUID().toString());
-//        System.out.println(UUID.randomUUID().toString());
-//    }
-
     @Lob
     private byte[] picture;
 
+    public static void main(String[] args) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (
+                FileInputStream fileInputStream = new FileInputStream("/Users/pooya/Downloads/MongoDB.ppt");
+        ) {
+            byte[] a = new byte[1024];
+            int len;
+            while ((len = fileInputStream.read(a)) != -1) {
+                baos.write(a, 0, len);
+            }
+        }
+        System.out.println(Base64.getEncoder().encodeToString(baos.toByteArray()));
+
+
+    }
 }
+

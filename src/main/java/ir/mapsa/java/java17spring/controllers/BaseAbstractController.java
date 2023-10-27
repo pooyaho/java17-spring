@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class BaseAbstractController<D,E> {
+public abstract class BaseAbstractController<D,E,S extends AbstractService<E,?>> {
     @Autowired
     protected BaseAdapter<D,E> adapter;
     @Autowired
-    protected AbstractService<E> service;
+    protected S service;
 
 
     @PostMapping
