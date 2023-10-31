@@ -3,6 +3,8 @@ package ir.mapsa.java.java17spring.controllers;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,6 +25,8 @@ import java.util.Properties;
 public class ControllersExceptionHandler {
     private static final String[] LOCALES = {"fa_IR", "en_US"};
     private final Map<String, Properties> propertiesMap = new HashMap<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControllersExceptionHandler.class);
+
 
     @PostConstruct
     public void init() throws IOException {
@@ -44,7 +48,7 @@ public class ControllersExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody ExceptionDto handle(Exception e, HttpServletRequest request) {
-        e.printStackTrace();
+        LOGGER.error("Error occurred in controller!",e);
         String locale = request.getHeader("locale");
 
         Properties properties = this.propertiesMap.get(locale);

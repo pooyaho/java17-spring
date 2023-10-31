@@ -13,8 +13,17 @@ spring:
  data:
   mongodb:
    uri: mongodb://localhost:27017/java17
+ mvc:
+  view:
+   suffix: .html
+ thymeleaf:
+  cache: false
+  enabled: true
+  prefix: classpath:/templates/
+  suffix: .html
 #shaparak:
 #  url: https://shaparak.ir
 dev: true
 server:
  port: 8081
+

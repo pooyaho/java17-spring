@@ -8,9 +8,33 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
+
+class MyClass{
+    public void printHi() {
+        System.out.println("Hello world!");
+    }
+}
 
 public class Main {
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) {
+        MyClass original = new MyClass();
+        MyClass a = (MyClass) Enhancer.create(MyClass.class, new MethodInterceptor() {
+            @Override
+            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+                System.out.println("Before hello");
+                method.invoke(original, args);
+                System.out.println("After hello");
+                return null;
+            }
+        });
+        a.printHi();
+    }
+    public static void main2(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         A a = A.builder().name("A").build();
         B b=B.builder().name("B").build();

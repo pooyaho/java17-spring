@@ -2,6 +2,8 @@ package ir.mapsa.java.java17spring.controllers;
 
 import ir.mapsa.java.java17spring.converters.BaseAdapter;
 import ir.mapsa.java.java17spring.services.AbstractMongoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -17,6 +19,8 @@ public abstract class BaseAbstractMongoController<D, E, S extends AbstractMongoS
     protected BaseAdapter<D, E> adapter;
     @Autowired
     protected S service;
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseAbstractMongoController.class);
+
 
 
     @PostMapping
@@ -37,11 +41,11 @@ public abstract class BaseAbstractMongoController<D, E, S extends AbstractMongoS
     @GetMapping("/{id}")
     @Cacheable(cacheNames = "CONTROLLER_CACHE", key = "#id")
     public D findById(@PathVariable String id) {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        LOGGER.trace("find by id called with id :"+id);
+        if (1 == 1) {
+            throw new RuntimeException();
         }
+
         return adapter.convertEntity(service.findById(id).orElse(null));
     }
 

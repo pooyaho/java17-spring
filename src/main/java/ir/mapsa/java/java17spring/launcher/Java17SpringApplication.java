@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = "ir.mapsa.java.java17spring")
 @EnableMongoRepositories(basePackages = "ir.mapsa.java.java17spring")
 @EnableCaching
+@EnableWebMvc
 public class Java17SpringApplication {
 
 //    @Autowired
@@ -36,7 +38,4 @@ public class Java17SpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(Java17SpringApplication.class, args);
     }
-
-
-
 }
