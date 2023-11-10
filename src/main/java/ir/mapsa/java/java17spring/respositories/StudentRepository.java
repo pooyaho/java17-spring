@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 
@@ -20,7 +21,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long>, Q
     Stream<StudentEntity> findByFatherNameIsNotNull(Pageable pageable);
 
     @Query(value = "select * from student where fatherName=:fatherName", nativeQuery = true)
-    List<StudentEntity> findByFatherNameIsNotNullWithNativeQuery(@Param("fatherName") String fatherName);
+    CompletableFuture<List<StudentEntity>> findByFatherNameIsNotNullWithNativeQuery(@Param("fatherName") String fatherName);
 
     @Query(value = "select * from student", nativeQuery = true)
     List<StudentEntity> findAllWithNativeQuery();

@@ -2,6 +2,7 @@ package ir.mapsa.java.java17spring.controllers;
 
 import ir.mapsa.java.java17spring.converters.BaseAdapter;
 import ir.mapsa.java.java17spring.services.AbstractMongoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +43,17 @@ public abstract class BaseAbstractMongoController<D, E, S extends AbstractMongoS
     @Cacheable(cacheNames = "CONTROLLER_CACHE", key = "#id")
     public D findById(@PathVariable String id) {
         LOGGER.trace("find by id called with id :"+id);
-        if (1 == 1) {
-            throw new RuntimeException();
-        }
+
 
         return adapter.convertEntity(service.findById(id).orElse(null));
     }
 
     @GetMapping("/")
-    public List<D> findByAll() {
+    public List<D> findByAll(HttpServletRequest request) {
+        if (1 == 1) {
+            throw new RuntimeException();
+        }
         return adapter.convertEntities(service.findAll());
-
     }
 
     @PostMapping("/search")
