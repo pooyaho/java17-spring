@@ -2,8 +2,8 @@ package ir.mapsa.java.java17spring.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ir.mapsa.java.java17spring.controllers.GeneralValidationGroup;
-import ir.mapsa.java.java17spring.controllers.NotNullGroup;
+import ir.mapsa.java.java17spring.models.validations.GeneralValidationGroup;
+import ir.mapsa.java.java17spring.models.validations.NotNullGroup;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-//package ir.mapsa.java.java17spring.models.entities;
+package ir.mapsa.java.java17spring.models.entities;//package ir.mapsa.java.java17spring.models.entities;
 //
 //import jakarta.persistence.DiscriminatorValue;
 //import jakarta.persistence.GeneratedValue;

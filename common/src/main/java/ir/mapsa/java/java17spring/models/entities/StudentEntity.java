@@ -33,7 +33,6 @@ public class StudentEntity {
     @Column(length = 10)
     private String studentId;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-
     private List<CourseEntity> passedCourses;
     @Enumerated(EnumType.STRING)
     @Transient

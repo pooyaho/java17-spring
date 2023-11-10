@@ -1,6 +1,8 @@
 package ir.mapsa.java.java17spring.controllers;
 
 import ir.mapsa.java.java17spring.converters.BaseAdapter;
+import ir.mapsa.java.java17spring.models.validations.GeneralValidationGroup;
+import ir.mapsa.java.java17spring.models.validations.NotNullGroup;
 import ir.mapsa.java.java17spring.services.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

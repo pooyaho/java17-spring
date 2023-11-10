@@ -1,7 +1,6 @@
 package ir.mapsa.java.java17spring;
 
 import ir.mapsa.java.java17spring.respositories.StudentRepository;
-import org.springframework.stereotype.Service;
 
 public class ShaparakService2 implements ShaparakService {
     private StudentRepository repository;
