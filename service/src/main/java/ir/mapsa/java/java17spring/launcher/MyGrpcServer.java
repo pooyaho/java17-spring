@@ -27,6 +27,6 @@ public class MyGrpcServer extends  MicroServiceGrpc.MicroServiceImplBase{
 
     @Override
     public void service3(RequestPr request, io.grpc.stub.StreamObserver<ResponsePr> responseObserver) {
-        System.out.println("Hallo der welt!");
+        System.out.println("Hello world!");
     }
 }
