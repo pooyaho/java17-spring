@@ -17,6 +17,10 @@ public class MyGrpcServer extends  MicroServiceGrpc.MicroServiceImplBase{
         responseObserver.onCompleted();
     }
 
+
+
+
+
     @Override
     public void service2(RequestPr request, io.grpc.stub.StreamObserver<ResponsePr> responseObserver) {
     }
