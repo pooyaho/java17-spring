@@ -1,4 +1,4 @@
-package ir.mapsa.java.java17spring.grpc;
+package ir.mapsa.java.java17spring.launcher;
 
 
 import ir.mapsa.services.MicroServiceGrpc;

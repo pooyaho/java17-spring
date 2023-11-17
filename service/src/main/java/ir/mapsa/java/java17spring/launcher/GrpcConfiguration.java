@@ -5,7 +5,6 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.protobuf.services.ProtoReflectionService;
-import ir.mapsa.java.java17spring.grpc.MyGrpcServer;
 import ir.mapsa.services.MicroServiceGrpc;
 import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Bean;
