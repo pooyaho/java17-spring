@@ -1,0 +1,150 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "ir.mapsa.services";
+option java_outer_classname = "MicroServiceProto";
+option objc_class_prefix = "";
+package micro;
+
+service MicroService {
+  rpc service1 (RequestPr) returns (ResponsePr) {
+  }
+  rpc service2 (RequestPr) returns (ResponsePr) {
+  }
+  rpc service3 (RequestPr) returns (ResponsePr) {
+  }
+}
+
+message RequestPr {
+  //
+  // Headers
+  //
+  string protocol_version = 1;
+  string language = 2;
+  //
+  int32 caller_id = 11;
+  int64 caller_req_id = 12;
+  int32 host_id = 13;
+  int64 host_req_id = 14;
+  int64 host_req_time = 15;
+  int32 op_code = 16;
+  string mobile_no = 17;
+  int64 terminal_id = 18;
+  int64 subscriber_id = 19;
+  string deprecated_client_type_info = 20;
+  int64 amount = 41;
+  string payment_id = 42;
+  bool payment_capability = 43;
+  string server_back_data = 44;
+  //
+  // Payload
+  //
+  string payload = 51;
+  //
+  // Payment
+  //
+  int32 payment_status = 70;
+  string payment_status_message = 71;
+  int64 applied_amount = 72;
+  string applied_amount_description = 73;
+  string rrn = 74;
+  string settle_token = 75;
+  int64 balance = 76;
+  int64 service_req_id = 77;
+  string payment_payload = 78;
+
+  string time_zone = 90;
+  string currency = 91;
+  string region = 92;
+
+  string account_id = 93;
+
+  ClientInfo client_info = 95;
+  PayChannel pay_channel = 96;
+  CardInfo card_info = 97;
+
+  int32 transaction_service_code = 100;
+  int64 merchant_code = 101;
+  SettleMode settle_mode = 102;
+  string iban_share = 103;
+}
+
+message ResponsePr {
+  //
+  // Header
+  //
+  int64 service_req_id = 1;
+  int32 caller_id = 11;
+  int64 caller_req_id = 12;
+  int32 host_id = 13;
+  int64 host_req_id = 14;
+  int64 host_req_time = 15;
+  string server_back_data = 21;
+  //
+  // Payload & status
+  //
+  int32 status_code = 51;
+  string status_message = 52;
+  string trace_message = 53;
+  string payload = 54;
+  //
+  // Payment
+  //
+  bool payment_need = 71;
+  string payment_id = 72;
+  int64 amount = 73;
+  int64 merchant = 74;
+  string iban_share = 75;
+  string description = 76;
+  string rrn = 77;
+  string bill_id = 78;
+  int64 service_code = 79;
+  string payment_token = 80;
+  SettleMode settle_mode = 81;
+  bool check_customer_identity_in_payment = 82; // doing shahkar check before/after payment
+
+  int32 discount = 94;
+  int32 wage = 95;
+  int32 tax = 96;
+
+  ClientAction client_action = 97;
+}
+
+enum PayChannel {
+  BANK_CARD = 0;
+  WALLET = 1;
+  CREDIT = 2;
+  DIRECT_DEBIT = 3;
+}
+
+enum SettleMode {
+  UP_TO_PAYMENT = 0;
+  AUTO_SETTLE = 1;
+  MANUAL_SETTLE = 2;
+}
+
+message ClientInfo {
+  string client_ip = 1;
+  string client_platform = 2;
+  string client_agent = 3;
+  string client_device_id = 4;
+  string client_version = 5;
+  int32 distribution_code = 6;
+  string client_network_type = 7;
+  string client_connection_name = 8;
+}
+
+message ClientAction {
+  string title = 1;
+  string message = 2;
+  string action_deeplink = 3;
+  string action_name = 4;
+  bool force_action = 5;
+}
+
+message CardInfo {
+  string card_number = 1;
+  string card_id = 2;
+  string pin = 3;
+  string cvv2 = 4;
+  string exp_date = 5;
+}
